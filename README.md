@@ -16,7 +16,7 @@ npm install mscs-face-api --save
 
 First you need to require the module:
 ```js
-const MSCSFACEAPI = require("./mscs-face-api");
+const MSCSFACEAPI = require("mscs-face-api");
 ```
 After you have to create an instance of the module. You will have to specify the key and the server that you want to use.
 The options for the server are the following:
