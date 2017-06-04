@@ -53,10 +53,6 @@ In order to have a better understanding of the methods I advise you to see the [
 * [Node.js](https://nodejs.org/) - Open source server framework.
 * [axios](https://www.npmjs.com/package/axios) - Promise based HTTP client for the browser and node.js.
 
-## Versioning
-
-I used [GitHub](https://github.com/) for versioning. For the versions available, see the [tags on this repository](https://github.com/itsdanielmatos/mscs-face-api/tags). 
-
 ## Authors
 
 * **Daniel Matos**
