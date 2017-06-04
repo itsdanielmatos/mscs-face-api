@@ -1,6 +1,6 @@
 {
   "name": "mscs-face-api",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Microsoft Cognitive Services Face API",
   "main": "index.js",
   "scripts": {
