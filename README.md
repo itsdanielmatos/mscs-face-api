@@ -27,7 +27,7 @@ The options for the server are the following:
   - SA (southeastasia).
   
 ```js
-var mscsfa = new MSCSFACEAPI(key,server);
+var mscsfa = new MSCSFACEAPI(key,"WCUS");
 ```
 
 ### Methods
