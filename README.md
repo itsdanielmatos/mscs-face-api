@@ -32,7 +32,7 @@ var mscsfa = new MSCSFACEAPI(key,server);
 
 ### Methods
 
-In order to have a better understanding of the methods I advise you to see the documentation.
+In order to have a better understanding of the methods I advise you to see the [documentation](http://htmlpreview.github.com/?https://github.com/itsdanielmatos/mscs-face-api/blob/master/Documentation/index.html).
 
 - createPersonGroup(personGroupId, name, userData) → {Promise}
 - deletePersonGroup(personGroupId) → {Promise}
