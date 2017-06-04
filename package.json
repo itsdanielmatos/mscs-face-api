@@ -1,0 +1,31 @@
+{
+  "name": "mscs-face-api",
+  "version": "0.1.0",
+  "description": "Microsoft Cognitive Services Face API",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/itsdanielmatos/mscs-face-api.git"
+  },
+  "keywords": [
+    "Microsoft",
+    "Cognitive",
+    "Services",
+    "Face",
+    "API"
+  ],
+  "author": "itsdanielmatos",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/itsdanielmatos/mscs-face-api/issues"
+  },
+  "homepage": "https://github.com/itsdanielmatos/mscs-face-api#readme",
+  "dependencies": {
+    "axios": "^0.16.1"
+  },
+  "devDependencies": {
+  }
+}
