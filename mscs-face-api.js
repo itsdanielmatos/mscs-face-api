@@ -203,7 +203,6 @@ function MSCSFaceApi(key, server) {
      * @returns {Promise} A successful call returns the new persistedFaceId. A unsuccessful call returns the error. 
      */
     function addPersonFace(personGroupId, personId, userData, image) {
-        console.log(SHeaders);
         return new Promise((resolve, reject) => {
             axios({
                 method: "post",
@@ -213,7 +212,7 @@ function MSCSFaceApi(key, server) {
                     "url": image
                 }
             }).then(function (res) {
-                resolve(res.data);
+                resolve(res.data.persistedFaceId);
             }).catch(function (err) {
                 reject(err.response.data.error);
             })
@@ -239,7 +238,7 @@ function MSCSFaceApi(key, server) {
                     "userData": userData
                 }
             }).then(function (res) {
-                resolve(res.data);
+                resolve(res.data.personId);
             }).catch(function (err) {
                 reject(err.response.data.error);
             })
@@ -294,27 +293,49 @@ function MSCSFaceApi(key, server) {
     /**
      * Identify unknown faces from a person group.
      * @method module:mscs-face-api.MSCSFaceApi#identifyFace
-     * @param {Array} faceIds - Array of query faces faceIds, created by the Face - Detect. Each of the faces are identified independently. The valid number of faceIds is between [1, 10].
      * @param {String} personGroupId - personGroupId of the target person group, created by Person Group - Create a Person Group.
+     * @param {Array} faceIds - Array of query faces faceIds, created by the Face - Detect. Each of the faces are identified independently. The valid number of faceIds is between.
      * @param {Number} confidenceThreshold - Confidence threshold of identification, used to judge whether one face belong to one person. The range of confidenceThreshold is [0, 1] (default specified by algorithm). (optional)
      * @returns {Promise} A successful call returns the identified candidate person(s) for each query face. An empty response indicates no faces detected. A unsuccessful call returns the error. 
      */
     function identifyFace(personGroupId, faceIds, confidenceThreshold) {
-        return new Promise((resolve, reject) => {
-            axios({
-                method: "post",
-                url: `${IDENTIFY}`,
-                headers: HEADERS,
-                data: {
-                    "personGroupId": personGroupId,
-                    "faceIds": faceIds,
-                    "confidenceThreshold": confidenceThreshold
-                }
-            }).then(function (res) {
-                resolve(res.data);
-            }).catch(function (err) {
-                reject(err.response.data.error);
+        function splitFaceIds(faceIds) {
+            let splits = [];
+            while (faceIds.length > 0) {
+                let arr = faceIds.splice(0, 10);
+                splits.push(arr);
+            }
+            return splits;
+        }
+        let splits = splitFaceIds(faceIds);
+        let all = splits.map(function (faceIds) {
+            return new Promise((resolve, reject) => {
+                axios({
+                    method: "post",
+                    url: `${IDENTIFY}`,
+                    headers: HEADERS,
+                    data: {
+                        "personGroupId": personGroupId,
+                        "faceIds": faceIds,
+                        "confidenceThreshold": confidenceThreshold
+                    }
+                }).then(function (res) {
+                    resolve(res.data);
+                }).catch(function (err) {
+                    reject(err.response.data.error);
+                })
             })
+        })
+        return new Promise((resolve, reject) => {
+            Promise.all(all)
+                .then((res) => {
+                    let identify = [];
+                    res.map(function(arr){
+                        identify = identify.concat(arr);
+                    })
+                    resolve(identify);
+                })
+                .catch((err) => reject(err));
         })
     }
 
