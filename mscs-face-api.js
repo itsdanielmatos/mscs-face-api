@@ -3,7 +3,7 @@
 /**
  * @module mscs-face-api
  * @author itsdanielmatos
- * @description This module helps you to comunicate with the Microsoft Cognitive Services Face API.
+ * @description This module helps you to communicate with the Microsoft Cognitive Services Face API.
  * Be aware that not all functionalities from the API are implemented since they were not necessary to the project that was being developed.
  * @requires axios
  */
@@ -26,7 +26,7 @@ function MSCSFaceApi(key, server) {
     };
 
     if (getServer(server) === undefined) {
-        throw new Error("The server specified doesn't exists")
+        throw new Error("The server specified doesn't exist")
     }
 
     const MSSERVER = `https://${getServer(server)}.api.cognitive.microsoft.com`;
@@ -366,14 +366,28 @@ function getServer(server) {
     switch (server) {
         case "WUS":
             return "westus";
+        case "WUS2":
+            return "westus2";
+        case "EUS":
+            return "eastus";
         case "EUS2":
-            return "eastus2"
+            return "eastus2";
         case "WCUS":
             return "westcentralus";
+        case "SCUS":
+            return "southcentralus";
         case "WE":
             return "westeurope";
+        case "NE":
+            return "northeurope";
         case "SA":
             return "southeastasia";
+        case "EA":
+            return "eastasia";
+        case "AE":
+            return "australiaeast";
+        case "BS":
+            return "brazilsouth";
         default:
             return undefined;
     }
